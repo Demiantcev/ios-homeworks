@@ -33,15 +33,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             var title: String
         }
         
-        
-        
-
-        
-        
-        
-        
-
-        
 
     }
 
