@@ -27,10 +27,10 @@ class FeedViewController: UIViewController {
         self.view.addSubview(self.button)
         
     }
-    
     @objc func buttonPost (sender: Any) {
-        self.navigationController?.pushViewController(PostViewController(), animated: true)
-        
-    }
+            let pushedVC = PostViewController()
+            pushedVC.post = Post(title: "Контент")
+            self.navigationController?.pushViewController(pushedVC, animated: true)
+        }
     
 }
