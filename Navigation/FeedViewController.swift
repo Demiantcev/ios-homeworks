@@ -32,5 +32,4 @@ class FeedViewController: UIViewController {
         self.navigationController?.pushViewController(PostViewController(), animated: true)
         
     }
-    
 }
