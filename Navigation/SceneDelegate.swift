@@ -29,8 +29,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         tabBar.setViewControllers([navigationController, navigationController2], animated: false)
         
-        struct Post {
-            var title: String
+        
         }
         
         
@@ -74,5 +73,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
 
-}
+
 

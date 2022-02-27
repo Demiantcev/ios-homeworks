@@ -17,7 +17,9 @@ class InfoViewController: UIViewController {
         view.backgroundColor = .white
         
         myButton.setTitle("Press me", for: .normal)
-        myButton.setTitleColor(.blue, for: .normal)
+        myButton.setTitleColor(.white, for: .normal)
+        myButton.backgroundColor = UIColor.blue
+        myButton.layer.cornerRadius = 25
         myButton.frame = CGRect(x: 150, y: 400, width: 100, height: 50)
         myButton.addTarget(self, action: #selector(buttonPress), for: .touchUpInside)
         self.view.addSubview(myButton)
