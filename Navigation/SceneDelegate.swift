@@ -17,6 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let tabBar = UITabBarController()
         
+        
         self.window = UIWindow(windowScene: windowScene)
         self.window?.rootViewController = tabBar
         self.window?.makeKeyAndVisible()
@@ -25,7 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         navigationController.tabBarItem = UITabBarItem(title: "Лента", image: UIImage(systemName: "eye.circle.fill"), tag: 0)
         
         let navigationController2 = UINavigationController(rootViewController: ProfileViewController())
-        navigationController2.tabBarItem = UITabBarItem (title: "Профиль", image: UIImage(systemName: "person.fill"), tag: 0)
+        navigationController2.tabBarItem = UITabBarItem (title: "Профиль", image: UIImage(systemName: "person.fill"), tag: 1)
         
         tabBar.setViewControllers([navigationController, navigationController2], animated: false)
         

@@ -9,30 +9,36 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    
-    var headerView = ProfileHeaderView()
-    
+    var headerView: ProfileHeaderView = {
+        var view = ProfileHeaderView(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .lightGray
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+        view.backgroundColor = .white
+        self.navigationController?.navigationBar.prefersLargeTitles = false
         self.navigationItem.title = "Профиль"
         
-        
         self.view.addSubview(self.headerView)
+
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
         
+        let topConstraint = self.headerView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
+        let leadingConstraint = self.headerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
+        let trailingConstraint = self.headerView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
+        let botomAnchor = self.headerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
         
-                }
+        NSLayoutConstraint.activate([
+            topConstraint, leadingConstraint, trailingConstraint, botomAnchor
+        ])
+    }
+    
+}
 
     
-    
-override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-    self.headerView.frame = view.frame
-    
- 
-        
-        
-    }
-}
+
