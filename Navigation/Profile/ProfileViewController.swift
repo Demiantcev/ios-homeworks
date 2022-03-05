@@ -31,10 +31,10 @@ class ProfileViewController: UIViewController {
         let topConstraint = self.headerView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
         let leadingConstraint = self.headerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
         let trailingConstraint = self.headerView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
-        let botomAnchor = self.headerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
+        let bottomAnchor = self.headerView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
         
         NSLayoutConstraint.activate([
-            topConstraint, leadingConstraint, trailingConstraint, botomAnchor
+            topConstraint, leadingConstraint, trailingConstraint, bottomAnchor
         ])
     }
     
