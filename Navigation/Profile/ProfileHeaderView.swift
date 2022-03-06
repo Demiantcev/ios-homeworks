@@ -72,7 +72,6 @@ class ProfileHeaderView: UIView {
         return button
     }()
     @objc func showStatus (sender: Any) {
-        // showLabel.text?.append(contentsOf: statusText)
         showLabel.text = statusText
     }
     
