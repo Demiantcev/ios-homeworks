@@ -31,7 +31,6 @@ class ProfileViewController: UIViewController {
         NSLayoutConstraint.activate([
             topConstraint, leadingConstraint, trailingConstraint, bottomConstraint
         ])
-
     }
     
     override func viewWillLayoutSubviews() {

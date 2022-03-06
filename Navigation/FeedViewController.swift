@@ -22,14 +22,14 @@ class FeedViewController: UIViewController {
         button.addTarget(self, action: #selector(buttonPost), for: .touchUpInside)
         return button
     }()
-        @objc func buttonPost (sender: Any) {
-            let pushedVC = PostViewController()
-            pushedVC.post = Post(title: "Контент")
-            self.navigationController?.pushViewController(pushedVC, animated: true)
-        }
+    @objc func buttonPost (sender: Any) {
+        let pushedVC = PostViewController()
+        pushedVC.post = Post(title: "Контент")
+        self.navigationController?.pushViewController(pushedVC, animated: true)
+    }
     
     private lazy var stackView: UIStackView = {
-       let stackView = UIStackView()
+        let stackView = UIStackView()
         
         stackView.axis = .vertical
         stackView.spacing = 10
@@ -55,6 +55,6 @@ class FeedViewController: UIViewController {
         NSLayoutConstraint.activate([
             buttonXCenter, buttonYCenter, buttonWidthConstraint ,buttonHeightConstraint
         ])
-    
-}
+        
+    }
 }
