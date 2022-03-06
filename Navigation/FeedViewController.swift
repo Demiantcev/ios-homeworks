@@ -10,6 +10,7 @@ import UIKit
 class FeedViewController: UIViewController {
     
     var button = UIButton()
+    var stackView = UIStackView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
