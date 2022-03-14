@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, UITextFieldDelegate {
     
     var headerView: ProfileHeaderView = {
         var view = ProfileHeaderView(frame: .zero)
@@ -15,12 +15,12 @@ class ProfileViewController: UIViewController {
         return view
     }()
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         self.navigationController?.navigationBar.prefersLargeTitles = false
         self.navigationItem.title = "Профиль"
+        headerView.statusTextField.delegate = self
         
         self.view.addSubview(self.headerView)
         let topConstraint = self.headerView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
@@ -32,10 +32,9 @@ class ProfileViewController: UIViewController {
             topConstraint, leadingConstraint, trailingConstraint, bottomConstraint
         ])
     }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
 

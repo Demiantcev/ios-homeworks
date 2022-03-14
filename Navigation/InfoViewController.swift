@@ -9,21 +9,27 @@ import UIKit
 
 class InfoViewController: UIViewController {
     
-    var myButton = UIButton()
+    var myButton: UIButton = {
+        var button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setBackgroundImage(.init(systemName: "exclamationmark.circle.fill"), for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.addTarget(self, action: #selector(buttonPress), for: .touchUpInside)
+        return button
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .white
-        
-        myButton.setTitle("Press me", for: .normal)
-        myButton.setTitleColor(.white, for: .normal)
-        myButton.backgroundColor = UIColor.blue
-        myButton.layer.cornerRadius = 25
-        myButton.frame = CGRect(x: 150, y: 400, width: 100, height: 50)
-        myButton.addTarget(self, action: #selector(buttonPress), for: .touchUpInside)
         self.view.addSubview(myButton)
         
+        let buttonYCenter = self.myButton.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
+        let buttonXCenter = self.myButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
+        let buttonHeightConstraint = self.myButton.heightAnchor.constraint(equalToConstant: 50)
+        let buttonWidthConstraint = self.myButton.widthAnchor.constraint(equalToConstant: 50)
+        NSLayoutConstraint.activate([
+            buttonXCenter, buttonYCenter, buttonWidthConstraint ,buttonHeightConstraint
+        ])
     }
     
     @objc func buttonPress () {

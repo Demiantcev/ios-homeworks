@@ -25,8 +25,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navigationController = UINavigationController(rootViewController: FeedViewController())
         navigationController.tabBarItem = UITabBarItem(title: "Лента", image: UIImage(systemName: "eye.circle.fill"), tag: 0)
         
-        let navigationController2 = UINavigationController(rootViewController: ProfileViewController())
+        let navigationController2 = UINavigationController(rootViewController: LogInViewController())
         navigationController2.tabBarItem = UITabBarItem (title: "Профиль", image: UIImage(systemName: "person.fill"), tag: 1)
+        navigationController2.navigationBar.isHidden = true
         
         tabBar.setViewControllers([navigationController, navigationController2], animated: false)
         
