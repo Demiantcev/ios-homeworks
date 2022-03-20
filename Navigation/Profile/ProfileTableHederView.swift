@@ -1,26 +1,39 @@
 //
-//  ProfileHeaderView.swift
+//  ProfileTableHederView.swift
 //  Navigation
 //
-//  Created by Кирилл Демьянцев on 25.02.2022.
+//  Created by Кирилл Демьянцев on 14.03.2022.
 //
 
 
 import UIKit
 
-class ProfileHeaderView: UIView {
+class ProfileTableHeaderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setup()
+        self.setupConstraint()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func setupConstraint() {
+
+        let topConstraint = self.topAnchor.constraint(equalTo: self.topAnchor)
+        let leadingConstraint = self.leadingAnchor.constraint(equalTo: self.leadingAnchor)
+        let trailingConstraint = self.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+        let heightConstraint = self.heightAnchor.constraint(equalToConstant: 265)
+
+        NSLayoutConstraint.activate([
+            topConstraint, leadingConstraint, trailingConstraint, heightConstraint
+        ])
+    }
     func setup() {
         
+        self.statusTextField.delegate = self
         self.backgroundColor = .systemGray4
         self.addSubview(showButton)
         self.addSubview(showLabel)
@@ -129,4 +142,12 @@ class ProfileHeaderView: UIView {
         }
     }
 }
+extension ProfileTableHeaderView: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
 
