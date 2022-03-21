@@ -82,13 +82,14 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        self.registerForKeyboardNotifications()
         
         loginTextField.delegate = self
         passwordTextField.delegate = self
         
         self.view.addSubview(self.myScrollView)
-        self.myScrollView.addSubview(stackView)
-        self.myScrollView.addSubview(buttonLogIn)
+        self.myScrollView.addSubview(self.stackView)
+        self.myScrollView.addSubview(self.buttonLogIn)
         self.myScrollView.addSubview(self.vkImage)
         self.stackView.addArrangedSubview(self.loginTextField)
         self.stackView.addArrangedSubview(self.passwordTextField)
@@ -106,7 +107,8 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         let stackLeadingConstraint = self.stackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16)
         let stackTrailingConstraint = self.stackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16)
         let stackHeightConstraint = self.stackView.heightAnchor.constraint(equalToConstant: 100)
-        let stackTopConstraint = self.stackView.topAnchor.constraint(equalTo: self.vkImage.bottomAnchor, constant: 120)
+        let stackCenterXConstraint = self.stackView.centerXAnchor.constraint(equalTo: self.myScrollView.centerXAnchor)
+        let stackCenterYConstraint = self.stackView.centerYAnchor.constraint(equalTo: self.myScrollView.centerYAnchor)
         
         let buttonTopConstraint = self.buttonLogIn.topAnchor.constraint(equalTo: self.stackView.bottomAnchor, constant: 16)
         let buttonHeightConstraint = self.buttonLogIn.heightAnchor.constraint(equalToConstant: 50)
@@ -115,15 +117,8 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         
         
         NSLayoutConstraint.activate([
-            imageWidthConstrains, imageHeightConstrains, imageXConstraint, imageTopConstraint, stackHeightConstraint, stackLeadingConstraint, stackTrailingConstraint, stackTopConstraint, scrollTopConstraint, scrollLeftConstraint, scrollRightConstraint, scrollBottomConstraint, buttonHeightConstraint, buttonLeadingConstraint, buttonTrailingConstraint, buttonTopConstraint
+            imageWidthConstrains, imageHeightConstrains, imageXConstraint, imageTopConstraint, stackHeightConstraint, stackLeadingConstraint, stackTrailingConstraint, scrollTopConstraint, scrollLeftConstraint, scrollRightConstraint, scrollBottomConstraint, buttonHeightConstraint, buttonLeadingConstraint, buttonTrailingConstraint, buttonTopConstraint, stackCenterXConstraint, stackCenterYConstraint
         ])
-        
-        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
-            self.view.frame.origin.y = -100
-        }
-        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: nil) { (nc) in
-            self.view.frame.origin.y = 0
-        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -131,5 +126,19 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    func registerForKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(kbShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(kbShow), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    @objc func kbShow (notification: NSNotification) {
+        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height - 50
+            
+            let contentOffSet: CGPoint = notification.name == UIResponder.keyboardWillHideNotification ? .zero : CGPoint(x: 0, y: keyboardHeight)
+            
+            self.myScrollView.contentOffset = contentOffSet
+        }
+    }
 }
 
