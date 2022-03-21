@@ -133,7 +133,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     @objc func kbShow (notification: NSNotification) {
         if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
-            let keyboardHeight = keyboardRectangle.height - 50
+            let keyboardHeight = keyboardRectangle.height - 150
             
             let contentOffSet: CGPoint = notification.name == UIResponder.keyboardWillHideNotification ? .zero : CGPoint(x: 0, y: keyboardHeight)
             
