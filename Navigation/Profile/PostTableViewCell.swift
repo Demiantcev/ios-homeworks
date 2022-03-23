@@ -112,9 +112,9 @@ class PostTableViewCell: UITableViewCell {
         
         let viewsTopConstraint = self.viewsLabel.topAnchor.constraint(equalTo: self.likeLabel.topAnchor)
         let viewsTrailingConstraint = self.viewsLabel.trailingAnchor.constraint(equalTo: self.backView.trailingAnchor,constant: -16)
-        let viewsBottonConstraint = self.viewsLabel.bottomAnchor.constraint(equalTo: self.backView.bottomAnchor)
+        let viewsBottomConstraint = self.viewsLabel.bottomAnchor.constraint(equalTo: self.backView.bottomAnchor)
 
-        NSLayoutConstraint.activate([imageLeadingConstraint, imageTrailingConstraint, imageHeightConstraint, authorTopConstraint, authorBottomConstraint, authorLeadingConstraint, authorTrailingConstraint, textLeadingConstraint, textTrailingConstraint, textBottomConstraint, viewsTopConstraint, likeLeadingConstraint, imageBottomConstraint, viewsTrailingConstraint, viewsBottonConstraint, likeBottonConstraint
+        NSLayoutConstraint.activate([imageLeadingConstraint, imageTrailingConstraint, imageHeightConstraint, authorTopConstraint, authorBottomConstraint, authorLeadingConstraint, authorTrailingConstraint, textLeadingConstraint, textTrailingConstraint, textBottomConstraint, viewsTopConstraint, likeLeadingConstraint, imageBottomConstraint, viewsTrailingConstraint, viewsBottomConstraint, likeBottonConstraint
                                     ])
     }
     

@@ -17,6 +17,7 @@ class ProfileViewController: UIViewController {
         table.translatesAutoresizingMaskIntoConstraints = false
         table.register(UITableViewCell.self, forCellReuseIdentifier: "DefaultCell")
         table.register(PostTableViewCell.self, forCellReuseIdentifier: "PostProfile")
+        table.register(PhotosTableViewCell.self, forCellReuseIdentifier: "Photos")
         return table
     }()
     
@@ -45,16 +46,29 @@ class ProfileViewController: UIViewController {
         NSLayoutConstraint.activate([
             topConstraint, leadingConstraint, trailingConstraint, bottomConstraint
         ])
-  }
+    }
 }
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.postProfile.count
+        switch section {
+        case 0:
+            return self.postProfile.count
+        case 1:
+            return 1
+        default:
+            break
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "PostProfile", for: indexPath) as? PostTableViewCell else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath)
             return cell
@@ -67,8 +81,10 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                                                     likes: post.likes,
                                                     views: post.views)
         cell.setup(with: viewModel)
+        
         return cell
     }
+
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return ProfileTableHeaderView()
@@ -76,7 +92,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 265
     }
-
 }
 
 

@@ -12,7 +12,7 @@ class PhotosTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+        setupImageCell()
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -28,7 +28,7 @@ class PhotosTableViewCell: UITableViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    var fotoImage: UIImageView = {
+    var fotoImage1: UIImageView = {
         var foto = UIImageView()
         foto.translatesAutoresizingMaskIntoConstraints = false
         foto.layer.cornerRadius = 6
@@ -37,11 +37,39 @@ class PhotosTableViewCell: UITableViewCell {
         foto.image = UIImage(named: "1")
        return foto
     }()
+    var fotoImage2: UIImageView = {
+        var foto = UIImageView()
+        foto.translatesAutoresizingMaskIntoConstraints = false
+        foto.layer.cornerRadius = 6
+        foto.clipsToBounds = true
+        foto.contentMode = .scaleAspectFit
+        foto.image = UIImage(named: "2")
+       return foto
+    }()
+    var fotoImage3: UIImageView = {
+        var foto = UIImageView()
+        foto.translatesAutoresizingMaskIntoConstraints = false
+        foto.layer.cornerRadius = 6
+        foto.clipsToBounds = true
+        foto.contentMode = .scaleAspectFit
+        foto.image = UIImage(named: "3")
+       return foto
+    }()
+    var fotoImage4: UIImageView = {
+        var foto = UIImageView()
+        foto.translatesAutoresizingMaskIntoConstraints = false
+        foto.layer.cornerRadius = 6
+        foto.clipsToBounds = true
+        foto.contentMode = .scaleAspectFit
+        foto.image = UIImage(named: "4")
+       return foto
+    }()
     
     var fotoLabel: UILabel = {
         var label = UILabel()
         label.font = .systemFont(ofSize: 24, weight: .bold)
-        label.textColor = .black
+        label.textColor = .white
+        label.text = "Photos"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -53,31 +81,34 @@ class PhotosTableViewCell: UITableViewCell {
         return button
     }()
     
-    var verticalStack: UIStackView = {
-       var stack = UIStackView()
-        stack.axis = .horizontal
-        return stack
-    }()
+//    var verticalStack: UIStackView = {
+//       var stack = UIStackView()
+//        stack.axis = .horizontal
+//        stack.distribution = .fillEqually
+//        stack.spacing = 8
+//        stack.translatesAutoresizingMaskIntoConstraints = false
+//        return stack
+//    }()
     
     
     func setupImageCell() {
         self.contentView.addSubview(backView)
-        self.backView.addSubview(fotoImage)
-        self.backView.addSubview(fotoLabel)
-        self.backView.addSubview(galleryButton)
+//        self.backView.addSubview(fotoImage1)
+//        self.backView.addSubview(fotoImage2)
+//        self.backView.addSubview(fotoImage3)
+//        self.backView.addSubview(fotoImage4)
+//        self.backView.addSubview(fotoLabel)
+//        self.backView.addSubview(galleryButton)
         
         let topConstraint = self.backView.topAnchor.constraint(equalTo: self.contentView.topAnchor)
         let leadingConstraint = self.backView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor)
         let trailingConstraint = self.backView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
         let bottomConstraint = self.backView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
         
-        let fotoLabelTopConstraint = self.fotoLabel.topAnchor.constraint(equalTo: self.backView.topAnchor, constant: 12)
-        let fotoLabelLeadingConstraint = self.fotoLabel.leadingAnchor.constraint(equalTo: self.backView.leadingAnchor, constant: 12)
-        let fotoLabelTrailingConstraint = self.fotoLabel.trailingAnchor.constraint(equalTo: self.galleryButton.leadingAnchor)
-        let fotoLabelBottomConstraint = self.fotoLabel.bottomAnchor.constraint(equalTo: self.fotoImage.topAnchor, constant: 12)
         
         
         
-        NSLayoutConstraint.activate([topConstraint, leadingConstraint, trailingConstraint, bottomConstraint, fotoLabelTopConstraint, fotoLabelBottomConstraint, fotoLabelLeadingConstraint, fotoLabelTrailingConstraint])
+        
+        NSLayoutConstraint.activate([topConstraint, leadingConstraint, trailingConstraint, bottomConstraint])
     }
 }
