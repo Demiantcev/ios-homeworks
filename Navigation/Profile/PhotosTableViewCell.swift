@@ -5,7 +5,7 @@
 //  Created by Кирилл Демьянцев on 21.03.2022.
 //
 
-import Foundation
+
 import UIKit
 
 class PhotosTableViewCell: UITableViewCell {
@@ -18,13 +18,9 @@ class PhotosTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var myPhotos = ["1", "2", "3", "4", "5",
-                            "6", "7", "8", "9", "10",
-                            "11", "12", "13", "14", "15",
-                            "16", "17", "18", "19", "20"
-    ]
     var backView: UIView = {
         var view = UIView()
+        view.backgroundColor = .white
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -34,7 +30,6 @@ class PhotosTableViewCell: UITableViewCell {
         foto.layer.cornerRadius = 6
         foto.clipsToBounds = true
         foto.contentMode = .scaleAspectFit
-        foto.image = UIImage(named: "1")
        return foto
     }()
     var fotoImage2: UIImageView = {
@@ -43,7 +38,6 @@ class PhotosTableViewCell: UITableViewCell {
         foto.layer.cornerRadius = 6
         foto.clipsToBounds = true
         foto.contentMode = .scaleAspectFit
-        foto.image = UIImage(named: "2")
        return foto
     }()
     var fotoImage3: UIImageView = {
@@ -52,7 +46,6 @@ class PhotosTableViewCell: UITableViewCell {
         foto.layer.cornerRadius = 6
         foto.clipsToBounds = true
         foto.contentMode = .scaleAspectFit
-        foto.image = UIImage(named: "3")
        return foto
     }()
     var fotoImage4: UIImageView = {
@@ -61,54 +54,68 @@ class PhotosTableViewCell: UITableViewCell {
         foto.layer.cornerRadius = 6
         foto.clipsToBounds = true
         foto.contentMode = .scaleAspectFit
-        foto.image = UIImage(named: "4")
        return foto
     }()
-    
+
     var fotoLabel: UILabel = {
         var label = UILabel()
-        label.font = .systemFont(ofSize: 24, weight: .bold)
-        label.textColor = .white
         label.text = "Photos"
+        label.font = .systemFont(ofSize: 24, weight: .bold)
+        label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     var galleryButton: UIButton = {
-        var button = UIButton()
+        var button = UIButton(type: .roundedRect)
         button.setBackgroundImage(UIImage(systemName: "chevron.right"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-//    var verticalStack: UIStackView = {
-//       var stack = UIStackView()
-//        stack.axis = .horizontal
-//        stack.distribution = .fillEqually
-//        stack.spacing = 8
-//        stack.translatesAutoresizingMaskIntoConstraints = false
-//        return stack
-//    }()
-    
-    
+    var horizontalStack: UIStackView = {
+       var stack = UIStackView()
+        stack.axis = .horizontal
+        stack.distribution = .fillEqually
+        stack.spacing = 8
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+
     func setupImageCell() {
         self.contentView.addSubview(backView)
-//        self.backView.addSubview(fotoImage1)
-//        self.backView.addSubview(fotoImage2)
-//        self.backView.addSubview(fotoImage3)
-//        self.backView.addSubview(fotoImage4)
-//        self.backView.addSubview(fotoLabel)
-//        self.backView.addSubview(galleryButton)
+        self.backView.addSubview(horizontalStack)
+        self.horizontalStack.addArrangedSubview(fotoImage1)
+        self.horizontalStack.addArrangedSubview(fotoImage2)
+        self.horizontalStack.addArrangedSubview(fotoImage3)
+        self.horizontalStack.addArrangedSubview(fotoImage4)
+        self.backView.addSubview(fotoLabel)
+        self.backView.addSubview(galleryButton)
         
         let topConstraint = self.backView.topAnchor.constraint(equalTo: self.contentView.topAnchor)
         let leadingConstraint = self.backView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor)
         let trailingConstraint = self.backView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
         let bottomConstraint = self.backView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
         
+        let fotoLabelTopConstraint = self.fotoLabel.topAnchor.constraint(equalTo: self.backView.topAnchor, constant: 12)
+        let fotoLabelLeadingConstraint = self.fotoLabel.leadingAnchor.constraint(equalTo: self.backView.leadingAnchor, constant: 12)
+        let fotoLabelTrailingConstraint = self.fotoLabel.trailingAnchor.constraint(equalTo: self.backView.trailingAnchor)
+        let fotoLabelBottomConstraint = self.fotoLabel.bottomAnchor.constraint(equalTo: self.horizontalStack.topAnchor, constant: -12)
         
+        let buttonCenterXConstraint = self.galleryButton.centerYAnchor.constraint(equalTo: self.fotoLabel.centerYAnchor)
+        let buttonTrailingConstraint = self.galleryButton.trailingAnchor.constraint(equalTo: self.backView.trailingAnchor, constant: -12)
         
+        let stackLeadingConstraint = self.horizontalStack.leadingAnchor.constraint(equalTo: self.backView.leadingAnchor, constant: 12)
+        let stackTrailingConstraint = self.horizontalStack.trailingAnchor.constraint(equalTo: self.backView.trailingAnchor, constant: -12)
+        let stackBottomConstraint = self.horizontalStack.bottomAnchor.constraint(equalTo: self.backView.bottomAnchor, constant: -12)
+        let stackHeightConstraint = self.horizontalStack.heightAnchor.constraint(equalToConstant: 60)
         
-        
-        NSLayoutConstraint.activate([topConstraint, leadingConstraint, trailingConstraint, bottomConstraint])
+        NSLayoutConstraint.activate([topConstraint, leadingConstraint, trailingConstraint, bottomConstraint, fotoLabelTopConstraint, fotoLabelLeadingConstraint, fotoLabelTrailingConstraint,fotoLabelBottomConstraint, stackBottomConstraint, stackLeadingConstraint, stackTrailingConstraint, stackHeightConstraint, buttonCenterXConstraint, buttonTrailingConstraint])
+    }
+    func cellConfigure(with text: String) {
+        fotoImage1.image = UIImage(named: text)
+        fotoImage2.image = UIImage(named: text)
+        fotoImage3.image = UIImage(named: text)
+        fotoImage4.image = UIImage(named: text)
     }
 }

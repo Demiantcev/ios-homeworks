@@ -18,6 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let tabBar = UITabBarController()
         
         
+        
         self.window = UIWindow(windowScene: windowScene)
         self.window?.rootViewController = tabBar
         self.window?.makeKeyAndVisible()
@@ -27,9 +28,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let navigationController2 = UINavigationController(rootViewController: LogInViewController())
         navigationController2.tabBarItem = UITabBarItem (title: "Профиль", image: UIImage(systemName: "person.fill"), tag: 1)
-        navigationController2.navigationBar.isHidden = true
+        navigationController2.navigationBar.isHidden = false
         
         tabBar.setViewControllers([navigationController, navigationController2], animated: false)
+        
+        let navigationController3 = UINavigationController(rootViewController: PhotosViewController())
+        navigationController3.navigationBar.isHidden = false
+        
         
         
         }

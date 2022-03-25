@@ -133,11 +133,16 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     @objc func kbShow (notification: NSNotification) {
         if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
-            let keyboardHeight = keyboardRectangle.height - 150
+            let keyboardHeight = keyboardRectangle.height
             
-            let contentOffSet: CGPoint = notification.name == UIResponder.keyboardWillHideNotification ? .zero : CGPoint(x: 0, y: keyboardHeight)
+            let loginButtonBottomPointY = self.buttonLogIn.frame.origin.y + 50
+            let keyboardOriginY = self.view.frame.height - keyboardHeight
             
-            self.myScrollView.contentOffset = contentOffSet
+            let yOffset = keyboardOriginY < loginButtonBottomPointY
+            ? loginButtonBottomPointY - keyboardOriginY + 16
+            : 0
+            
+            self.myScrollView.contentOffset = CGPoint(x: 0, y: yOffset)
         }
     }
 }
