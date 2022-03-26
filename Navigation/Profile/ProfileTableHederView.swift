@@ -82,7 +82,7 @@ class ProfileTableHeaderView: UIView {
         button.layer.shadowOffset = .init(width: 4, height: 4)
         button.layer.shadowRadius = 4
         button.layer.shadowOpacity = 0.7
-        button.addTarget(self, action: #selector(showStatus), for: .touchUpInside)
+        button.addTarget(ProfileTableHeaderView.self, action: #selector(showStatus), for: .touchUpInside)
         return button
     }()
     @objc func showStatus (sender: Any) {
@@ -131,7 +131,7 @@ class ProfileTableHeaderView: UIView {
         text.clearButtonMode = .whileEditing
         text.clearButtonMode = .unlessEditing
         text.clearButtonMode = .always
-        text.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
+        text.addTarget(ProfileTableHeaderView.self, action: #selector(statusTextChanged), for: .editingChanged)
         return text
     }()
     

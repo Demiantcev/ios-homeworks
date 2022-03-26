@@ -14,7 +14,7 @@ class InfoViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setBackgroundImage(.init(systemName: "exclamationmark.circle.fill"), for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.addTarget(self, action: #selector(buttonPress), for: .touchUpInside)
+        button.addTarget(InfoViewController.self, action: #selector(buttonPress), for: .touchUpInside)
         return button
     }()
     
