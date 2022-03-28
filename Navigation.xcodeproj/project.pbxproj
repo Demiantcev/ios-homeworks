@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EB03725F27EF3406008200F3 /* GestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB03725E27EF3406008200F3 /* GestureView.swift */; };
 		EB23057627BE2FE30050CAA9 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB23057527BE2FE30050CAA9 /* FeedViewController.swift */; };
 		EB23057827BE2FFA0050CAA9 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB23057727BE2FFA0050CAA9 /* ProfileViewController.swift */; };
 		EB23057C27BE7ACB0050CAA9 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB23057B27BE7ACB0050CAA9 /* PostViewController.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EB03725E27EF3406008200F3 /* GestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureView.swift; sourceTree = "<group>"; };
 		EB23057527BE2FE30050CAA9 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		EB23057727BE2FFA0050CAA9 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		EB23057B27BE7ACB0050CAA9 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				EB824B1D27EC92E8007B9F36 /* PhotosViewController.swift */,
 				EB824B1F27ECC0B4007B9F36 /* PhotosCollectionViewCell.swift */,
 				EBFEE05727DFD71F003D2687 /* ProfileTableHederView.swift */,
+				EB03725E27EF3406008200F3 /* GestureView.swift */,
 				EBE7E84427DA1E4F00833DD4 /* LogInViewController.swift */,
 			);
 			path = Profile;
@@ -192,6 +195,7 @@
 				EB50409F27B95DF100600DC1 /* AppDelegate.swift in Sources */,
 				EB23057827BE2FFA0050CAA9 /* ProfileViewController.swift in Sources */,
 				EB23057627BE2FE30050CAA9 /* FeedViewController.swift in Sources */,
+				EB03725F27EF3406008200F3 /* GestureView.swift in Sources */,
 				EB23057E27BEB35C0050CAA9 /* Post.swift in Sources */,
 				EB23058027C11A510050CAA9 /* InfoViewController.swift in Sources */,
 				EBE7E84527DA1E4F00833DD4 /* LogInViewController.swift in Sources */,
