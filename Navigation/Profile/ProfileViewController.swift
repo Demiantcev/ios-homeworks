@@ -70,8 +70,8 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         var cell = UITableViewCell()
         
         if indexPath.section == 0 {
-          if let cell1 = tableView.dequeueReusableCell(withIdentifier: "Photos", for: indexPath) as? PhotosTableViewCell {
-              cell1.cellConfigure(with: photoProfile[indexPath.row])
+                  if let cell1 = tableView.dequeueReusableCell(withIdentifier: "Photos", for: indexPath) as? PhotosTableViewCell {
+                      cell1.cellConfigure(with: photoProfile)
                 cell = cell1
             }
             return cell

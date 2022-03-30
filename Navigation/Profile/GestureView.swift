@@ -24,6 +24,7 @@ class GestureView: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setBackgroundImage(UIImage(systemName: "clear.fill"), for: .normal)
         button.alpha = 0
+        button.addTarget(self, action: #selector(cancel), for: .touchUpInside)
         return button
     }()
     
@@ -65,7 +66,7 @@ class GestureView: UIViewController {
         self.tapGestureRecognizer.view?.isUserInteractionEnabled = true
     }
     
-    @objc private func tapGesture(_ gestureRecognizer: UIPanGestureRecognizer) {
+    @objc private func tapGesture(_ gestureRecognizer: UITapGestureRecognizer) {
         guard self.tapGestureRecognizer === gestureRecognizer else { return }
         
         self.isExpanded.toggle()
@@ -83,5 +84,9 @@ class GestureView: UIViewController {
         UIView.animate(withDuration: 0.3, delay: 0.5) {
             self.cancelButton.alpha = self.isExpanded ? 1 : 0
         }
+    }
+    @objc private func cancel(_ sender: Any) {
+        tapGesture(tapGestureRecognizer)
+        
     }
 }

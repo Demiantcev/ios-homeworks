@@ -30,6 +30,7 @@ class PhotosTableViewCell: UITableViewCell {
         foto.layer.cornerRadius = 6
         foto.clipsToBounds = true
         foto.contentMode = .scaleAspectFit
+        foto.tag = 1
        return foto
     }()
     var fotoImage2: UIImageView = {
@@ -38,6 +39,7 @@ class PhotosTableViewCell: UITableViewCell {
         foto.layer.cornerRadius = 6
         foto.clipsToBounds = true
         foto.contentMode = .scaleAspectFit
+        foto.tag = 2
        return foto
     }()
     var fotoImage3: UIImageView = {
@@ -46,6 +48,7 @@ class PhotosTableViewCell: UITableViewCell {
         foto.layer.cornerRadius = 6
         foto.clipsToBounds = true
         foto.contentMode = .scaleAspectFit
+        foto.tag = 3
        return foto
     }()
     var fotoImage4: UIImageView = {
@@ -54,6 +57,7 @@ class PhotosTableViewCell: UITableViewCell {
         foto.layer.cornerRadius = 6
         foto.clipsToBounds = true
         foto.contentMode = .scaleAspectFit
+        foto.tag = 4
        return foto
     }()
 
@@ -112,10 +116,17 @@ class PhotosTableViewCell: UITableViewCell {
         
         NSLayoutConstraint.activate([topConstraint, leadingConstraint, trailingConstraint, bottomConstraint, fotoLabelTopConstraint, fotoLabelLeadingConstraint, fotoLabelTrailingConstraint,fotoLabelBottomConstraint, stackBottomConstraint, stackLeadingConstraint, stackTrailingConstraint, stackHeightConstraint, buttonCenterXConstraint, buttonTrailingConstraint])
     }
-    func cellConfigure(with text: String) {
-        fotoImage1.image = UIImage(named: text)
-        fotoImage2.image = UIImage(named: text)
-        fotoImage3.image = UIImage(named: text)
-        fotoImage4.image = UIImage(named: text)
-    }
+    func cellConfigure(with texts: [String]) {
+            for text in texts {
+                if self.fotoImage1.tag == Int(text) {
+                    self.fotoImage1.image = UIImage(named: text)
+                } else if self.fotoImage2.tag == Int(text) {
+                    self.fotoImage2.image = UIImage(named: text)
+                } else if self.fotoImage3.tag == Int(text) {
+                    self.fotoImage3.image = UIImage(named: text)
+                } else if self.fotoImage4.tag == Int(text) {
+                    self.fotoImage4.image = UIImage(named: text)
+                }
+            }
+        }
 }
