@@ -8,15 +8,50 @@
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
+    
     var window: UIWindow?
-
-
+    
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        let tabBar = UITabBarController()
+        
+        
+        
+        self.window = UIWindow(windowScene: windowScene)
+        self.window?.rootViewController = tabBar
+        self.window?.makeKeyAndVisible()
+        
+        let navigationController = UINavigationController(rootViewController: FeedViewController())
+        navigationController.tabBarItem = UITabBarItem(title: "Лента", image: UIImage(systemName: "eye.circle.fill"), tag: 0)
+        
+        let navigationController2 = UINavigationController(rootViewController: LogInViewController())
+        navigationController2.tabBarItem = UITabBarItem (title: "Профиль", image: UIImage(systemName: "person.fill"), tag: 1)
+        navigationController2.navigationBar.isHidden = false
+        
+        let navigationController3 = UINavigationController(rootViewController: GestureView())
+        navigationController3.tabBarItem = UITabBarItem(title: "Жесты", image: UIImage(systemName: "hand.draw"), tag: 3)
+        
+        tabBar.setViewControllers([navigationController, navigationController2, navigationController3], animated: false)
+        
+        let navigationController4 = UINavigationController(rootViewController: PhotosViewController())
+        navigationController4.navigationBar.isHidden = false
+        
+        
+        
+        }
+        
+        
+        
+
+        
+        
+        
+        
+
+        
+
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -48,5 +83,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
 
-}
+
 
