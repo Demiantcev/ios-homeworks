@@ -10,6 +10,7 @@ import UIKit
 
 class ProfileTableHeaderView: UIView {
     
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setup()
@@ -93,7 +94,6 @@ class ProfileTableHeaderView: UIView {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .gray
-        label.text = ""
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         return label
     }()
