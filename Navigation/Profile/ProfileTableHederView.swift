@@ -87,7 +87,14 @@ class ProfileTableHeaderView: UIView {
         return button
     }()
     @objc func showStatus (sender: Any) {
-        showLabel.text = statusText
+        if statusText == "" {
+            let alert = UIAlertController(title: "Некорректный ввод", message: "Напишите статус и нажмите на кнопку Show status", preferredStyle: .alert)
+            let action = UIAlertAction(title: "Oк", style: .cancel)
+            alert.addAction(action)
+            self.window?.rootViewController?.present(alert, animated: true, completion: nil)
+        } else {
+            showLabel.text = statusText
+        }
     }
     
     var showLabel: UILabel = {
@@ -151,5 +158,4 @@ extension ProfileTableHeaderView: UITextFieldDelegate {
         return true
     }
 }
-
 

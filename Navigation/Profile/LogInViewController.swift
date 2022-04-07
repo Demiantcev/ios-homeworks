@@ -25,42 +25,45 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         return button
     }()
     @objc func myProfile (sender: Any) {
+        let push = ProfileViewController()
+        self.navigationController?.pushViewController(push, animated: true)
         
-        if loginTextField.text == "" && passwordTextField.text == "" {
-            passwordTextField.backgroundColor = .red
-            passwordTextField.layer.cornerRadius = 10
-            UIView.animate(withDuration: 1, delay: 0) {
-                self.passwordTextField.backgroundColor = .clear
-            }
-            loginTextField.backgroundColor = .red
-            loginTextField.layer.cornerRadius = 10
-            UIView.animate(withDuration: 1, delay: 0) {
-                self.loginTextField.backgroundColor = .clear
-            }
-        } else if passwordTextField.text == "" {
-            passwordTextField.backgroundColor = .red
-            passwordTextField.layer.cornerRadius = 10
-            UIView.animate(withDuration: 1, delay: 0) {
-                self.passwordTextField.backgroundColor = .clear
-            }
-        } else if loginTextField.text == "" {
-            loginTextField.backgroundColor = .red
-            loginTextField.layer.cornerRadius = 10
-            UIView.animate(withDuration: 1, delay: 0) {
-                self.loginTextField.backgroundColor = .clear
-            }
-        }
-        if passwordTextField.text?.count != minLength {
-            message.alpha = 1
-            UIView.animate(withDuration: 3, delay: 0) {
-                self.message.alpha = 0
-                self.message.text = "Пароль должен состоять из 6 символов!"
-            }
-        } else {
-            message.text = ""
-        }
-        alertLoginPassword()
-    }
+//        if loginTextField.text == "" && passwordTextField.text == "" {
+//            passwordTextField.backgroundColor = .red
+//            passwordTextField.layer.cornerRadius = 10
+//            UIView.animate(withDuration: 1, delay: 0) {
+//                self.passwordTextField.backgroundColor = .clear
+//            }
+//            loginTextField.backgroundColor = .red
+//            loginTextField.layer.cornerRadius = 10
+//            UIView.animate(withDuration: 1, delay: 0) {
+//                self.loginTextField.backgroundColor = .clear
+//            }
+//        } else if passwordTextField.text == "" {
+//            passwordTextField.backgroundColor = .red
+//            passwordTextField.layer.cornerRadius = 10
+//            UIView.animate(withDuration: 1, delay: 0) {
+//                self.passwordTextField.backgroundColor = .clear
+//            }
+//        } else if loginTextField.text == "" {
+//            loginTextField.backgroundColor = .red
+//            loginTextField.layer.cornerRadius = 10
+//            UIView.animate(withDuration: 1, delay: 0) {
+//                self.loginTextField.backgroundColor = .clear
+//            }
+//        }
+//        if passwordTextField.text?.count != minLength {
+//            message.alpha = 1
+//            UIView.animate(withDuration: 3, delay: 0) {
+//                self.message.alpha = 0
+//                self.message.text = "Пароль должен состоять из 6 символов!"
+//            }
+//        } else {
+//            message.text = ""
+//        }
+//        alertLoginPassword()
+   }
+    
     var vkImage: UIImageView = {
         var image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false

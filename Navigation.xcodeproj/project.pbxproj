@@ -21,6 +21,7 @@
 		EB67592C27E8BEED001A1FAC /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB67592B27E8BEED001A1FAC /* PhotosTableViewCell.swift */; };
 		EB824B1E27EC92E8007B9F36 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB824B1D27EC92E8007B9F36 /* PhotosViewController.swift */; };
 		EB824B2027ECC0B4007B9F36 /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB824B1F27ECC0B4007B9F36 /* PhotosCollectionViewCell.swift */; };
+		EBACB5CB27FAEA1300EDC098 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBACB5CA27FAEA1300EDC098 /* DetailView.swift */; };
 		EBE7E84527DA1E4F00833DD4 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE7E84427DA1E4F00833DD4 /* LogInViewController.swift */; };
 		EBFEE05827DFD71F003D2687 /* ProfileTableHederView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBFEE05727DFD71F003D2687 /* ProfileTableHederView.swift */; };
 		EBFEE05A27E230B7003D2687 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBFEE05927E230B7003D2687 /* PostTableViewCell.swift */; };
@@ -44,6 +45,7 @@
 		EB67592B27E8BEED001A1FAC /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
 		EB824B1D27EC92E8007B9F36 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		EB824B1F27ECC0B4007B9F36 /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
+		EBACB5CA27FAEA1300EDC098 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		EBE7E84427DA1E4F00833DD4 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		EBFEE05727DFD71F003D2687 /* ProfileTableHederView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHederView.swift; sourceTree = "<group>"; };
 		EBFEE05927E230B7003D2687 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				EBFEE05727DFD71F003D2687 /* ProfileTableHederView.swift */,
 				EB03725E27EF3406008200F3 /* GestureView.swift */,
 				EBE7E84427DA1E4F00833DD4 /* LogInViewController.swift */,
+				EBACB5CA27FAEA1300EDC098 /* DetailView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -191,6 +194,7 @@
 			files = (
 				EB23057C27BE7ACB0050CAA9 /* PostViewController.swift in Sources */,
 				EBFEE05827DFD71F003D2687 /* ProfileTableHederView.swift in Sources */,
+				EBACB5CB27FAEA1300EDC098 /* DetailView.swift in Sources */,
 				EB5040A327B95DF100600DC1 /* ViewController.swift in Sources */,
 				EB50409F27B95DF100600DC1 /* AppDelegate.swift in Sources */,
 				EB23057827BE2FFA0050CAA9 /* ProfileViewController.swift in Sources */,

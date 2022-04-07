@@ -7,9 +7,11 @@
 import UIKit
 
 class PostTableViewCell: UITableViewCell {
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.setup()
+        self.setupGestureLikeLabel()
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -22,6 +24,9 @@ class PostTableViewCell: UITableViewCell {
         let likes: Int
         let views: Int
     }
+    private let tapGestureRecognizer = UITapGestureRecognizer()
+    private var isExpanded = false
+    var ss = PostProfile()
     
     var backView: UIView = {
         var view = UIView()
@@ -62,6 +67,7 @@ class PostTableViewCell: UITableViewCell {
     
     var likeLabel: UILabel = {
         var label = UILabel()
+        label.tag = 1
         label.setContentCompressionResistancePriority(UILayoutPriority(250), for: .horizontal)
         label.text = "Likes: "
         label.font = .systemFont(ofSize: 16, weight: .regular)
@@ -125,6 +131,18 @@ class PostTableViewCell: UITableViewCell {
         let bottomConstraint = self.backView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
 
         return [topConstraint, leadingConstraint, trailingConstraint, bottomConstraint]
+    }
+    private func setupGestureLikeLabel() {
+        
+        self.likeLabel.addGestureRecognizer(tapGestureRecognizer)
+        self.tapGestureRecognizer.addTarget(self, action: #selector(self.tapLikeLabel))
+        self.tapGestureRecognizer.view?.isUserInteractionEnabled = true
+    }
+    @objc func tapLikeLabel(_ gestureRecognizer: UITapGestureRecognizer) {
+        guard self.tapGestureRecognizer === gestureRecognizer else { return }
+        
+        self.isExpanded.toggle()
+
     }
 }
 extension PostTableViewCell: Setupable {

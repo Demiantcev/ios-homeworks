@@ -70,6 +70,7 @@ class GestureView: UIViewController {
         guard self.tapGestureRecognizer === gestureRecognizer else { return }
         
         self.isExpanded.toggle()
+
         
         self.imageTopConstraint?.constant = self.isExpanded ? view.center.x : 50
         self.imageWidthConstraint?.constant = self.isExpanded ? view.frame.width : 140
