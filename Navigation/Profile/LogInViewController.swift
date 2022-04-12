@@ -20,43 +20,6 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         button.addTarget(self, action: #selector(myProfile), for: .touchUpInside)
         return button
     }()
-    @objc func myProfile (sender: Any) {
-        
-        if loginTextField.text == "" && passwordTextField.text == "" {
-            passwordTextField.backgroundColor = .red
-            passwordTextField.layer.cornerRadius = 10
-            UIView.animate(withDuration: 1, delay: 0) {
-                self.passwordTextField.backgroundColor = .clear
-            }
-            loginTextField.backgroundColor = .red
-            loginTextField.layer.cornerRadius = 10
-            UIView.animate(withDuration: 1, delay: 0) {
-                self.loginTextField.backgroundColor = .clear
-            }
-        } else if passwordTextField.text == "" {
-            passwordTextField.backgroundColor = .red
-            passwordTextField.layer.cornerRadius = 10
-            UIView.animate(withDuration: 1, delay: 0) {
-                self.passwordTextField.backgroundColor = .clear
-            }
-        } else if loginTextField.text == "" {
-            loginTextField.backgroundColor = .red
-            loginTextField.layer.cornerRadius = 10
-            UIView.animate(withDuration: 1, delay: 0) {
-                self.loginTextField.backgroundColor = .clear
-            }
-        }
-        if passwordTextField.text?.count != minLength {
-            message.alpha = 1
-            UIView.animate(withDuration: 5, delay: 0) {
-                self.message.alpha = 0
-                self.message.text = "Пароль должен состоять из 6 символов!"
-            }
-        } else {
-            message.text = ""
-        }
-        alertLoginPassword()
-}
     
     var vkImage: UIImageView = {
         var image = UIImageView()
@@ -69,6 +32,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         var text = UITextField()
         text.translatesAutoresizingMaskIntoConstraints = false
         text.textColor = .black
+        text.layer.cornerRadius = 7
         text.font = .systemFont(ofSize: 16, weight: .light)
         text.autocapitalizationType = .none
         text.placeholder = "Email or phone:"
@@ -84,6 +48,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         var text = UITextField()
         text.translatesAutoresizingMaskIntoConstraints = false
         text.textColor = .black
+        text.layer.cornerRadius = 7
         text.font = .systemFont(ofSize: 16, weight: .light)
         text.autocapitalizationType = .none
         text.placeholder = "Password:"
@@ -95,15 +60,12 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         text.clearButtonMode = .always
         return text
     }()
+    
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        stackView.backgroundColor = .systemGray6
-        stackView.distribution = .fillProportionally
-        stackView.layer.borderColor = UIColor.lightGray.cgColor
-        stackView.layer.borderWidth = 0.5
-        stackView.layer.cornerRadius = 10
+        stackView.distribution = .fillEqually
         return stackView
     }()
     
@@ -122,6 +84,65 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         return message
     }()
     
+    private lazy var loginBorder: UITextField = {
+        let textField = UITextField()
+        textField.layer.borderColor = UIColor.lightGray.cgColor
+        textField.backgroundColor = .systemGray6
+        textField.layer.borderWidth = 0.5
+        textField.layer.cornerRadius = 10
+        textField.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    private lazy var passwordBorder: UITextField = {
+        let textField = UITextField()
+        textField.layer.borderColor = UIColor.lightGray.cgColor
+        textField.backgroundColor = .systemGray6
+        textField.layer.borderWidth = 0.5
+        textField.layer.cornerRadius = 10
+        textField.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    
+    @objc func myProfile (sender: Any) {
+
+                if loginTextField.text == "" && passwordTextField.text == "" {
+                    passwordBorder.backgroundColor = .red
+                    passwordBorder.layer.cornerRadius = 10
+                    UIView.animate(withDuration: 1, delay: 0) {
+                        self.passwordBorder.backgroundColor = .clear
+                    }
+                    loginBorder.backgroundColor = .red
+                    loginBorder.layer.cornerRadius = 10
+                    UIView.animate(withDuration: 1, delay: 0) {
+                        self.loginBorder.backgroundColor = .clear
+                    }
+                } else if passwordTextField.text == "" {
+                    passwordBorder.backgroundColor = .red
+                    passwordBorder.layer.cornerRadius = 10
+                    UIView.animate(withDuration: 1, delay: 0) {
+                        self.passwordBorder.backgroundColor = .clear
+                    }
+                } else if loginTextField.text == "" {
+                    loginBorder.backgroundColor = .red
+                    loginBorder.layer.cornerRadius = 10
+                    UIView.animate(withDuration: 1, delay: 0) {
+                        self.loginBorder.backgroundColor = .clear
+                    }
+                }
+                if passwordTextField.text?.count != minLength {
+                    message.alpha = 1
+                    UIView.animate(withDuration: 5, delay: 0) {
+                        self.message.alpha = 0
+                        self.message.text = "Пароль должен состоять из 6 символов!"
+                    }
+                } else {
+                    message.text = ""
+                }
+                alertLoginPassword()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -135,8 +156,10 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         self.myScrollView.addSubview(self.buttonLogIn)
         self.myScrollView.addSubview(self.vkImage)
         self.myScrollView.addSubview(self.message)
-        self.stackView.addArrangedSubview(self.loginTextField)
-        self.stackView.addArrangedSubview(self.passwordTextField)
+        self.passwordBorder.addSubview(passwordTextField)
+        self.loginBorder.addSubview(loginTextField)
+        self.stackView.addArrangedSubview(self.loginBorder)
+        self.stackView.addArrangedSubview(self.passwordBorder)
         
         let scrollTopConstraint = self.myScrollView.topAnchor.constraint(equalTo: self.view.topAnchor)
         let scrollLeftConstraint = self.myScrollView.leftAnchor.constraint(equalTo: self.view.leftAnchor)
@@ -154,6 +177,16 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         let stackCenterXConstraint = self.stackView.centerXAnchor.constraint(equalTo: self.myScrollView.centerXAnchor)
         let stackCenterYConstraint = self.stackView.centerYAnchor.constraint(equalTo: self.myScrollView.centerYAnchor)
         
+        let loginTopConstraint = loginTextField.topAnchor.constraint(equalTo: loginBorder.topAnchor)
+        let loginBottomConstraint = loginTextField.bottomAnchor.constraint(equalTo: loginBorder.bottomAnchor)
+        let loginTrailingConstraint = loginTextField.trailingAnchor.constraint(equalTo: loginBorder.trailingAnchor, constant: -5)
+        let loginLeadingConstraint = loginTextField.leadingAnchor.constraint(equalTo: loginBorder.leadingAnchor, constant: 5)
+        
+        let passwordTopConstraint = passwordTextField.topAnchor.constraint(equalTo: passwordBorder.topAnchor)
+        let passwordBottomConstraint = passwordTextField.bottomAnchor.constraint(equalTo: passwordBorder.bottomAnchor)
+        let passwordTrailingConstraint = passwordTextField.trailingAnchor.constraint(equalTo: passwordBorder.trailingAnchor, constant: -5)
+        let passwordLeadingConstraint = passwordTextField.leadingAnchor.constraint(equalTo: passwordBorder.leadingAnchor, constant: 5)
+        
         let buttonTopConstraint = self.buttonLogIn.topAnchor.constraint(equalTo: self.stackView.bottomAnchor, constant: 16)
         let buttonHeightConstraint = self.buttonLogIn.heightAnchor.constraint(equalToConstant: 50)
         let buttonLeadingConstraint = self.buttonLogIn.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16)
@@ -165,12 +198,13 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         
         
         NSLayoutConstraint.activate([
-            imageWidthConstrains, imageHeightConstrains, imageXConstraint, imageTopConstraint, stackHeightConstraint, stackLeadingConstraint, stackTrailingConstraint, scrollTopConstraint, scrollLeftConstraint, scrollRightConstraint, scrollBottomConstraint, buttonHeightConstraint, buttonLeadingConstraint, buttonTrailingConstraint, buttonTopConstraint, stackCenterXConstraint, stackCenterYConstraint, labelTopConstraint, labelLeadingConstraint, labelBottomConstraint
+            imageWidthConstrains, imageHeightConstrains, imageXConstraint, imageTopConstraint, stackHeightConstraint, stackLeadingConstraint, stackTrailingConstraint, scrollTopConstraint, scrollLeftConstraint, scrollRightConstraint, scrollBottomConstraint, buttonHeightConstraint, buttonLeadingConstraint, buttonTrailingConstraint, buttonTopConstraint, stackCenterXConstraint, stackCenterYConstraint, labelTopConstraint, labelLeadingConstraint, labelBottomConstraint, loginTopConstraint, loginLeadingConstraint, loginBottomConstraint, loginTrailingConstraint, passwordTopConstraint, passwordBottomConstraint, passwordLeadingConstraint, passwordTrailingConstraint
         ])
     }
     
     func alertLoginPassword() {
         let push = ProfileViewController()
+        
         if loginTextField.text != login && passwordTextField.text != password {
             let alert = UIAlertController(title: "Некорректный ввод", message: "Логин: \(login)\nПароль: \(password)", preferredStyle: .alert)
             let action = UIAlertAction(title: "Oк", style: .cancel)
@@ -190,7 +224,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             self.navigationController?.pushViewController(push, animated: true)
         }
     }
-
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true

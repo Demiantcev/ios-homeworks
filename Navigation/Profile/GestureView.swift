@@ -35,14 +35,14 @@ class GestureView: UIViewController {
     
     private let tapGestureRecognizer = UITapGestureRecognizer()
     private var isExpanded = false
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(fotoImage)
         self.view.addSubview(cancelButton)
         self.setupConstraint()
         self.setupGesture()
-
+        
         view.backgroundColor = .systemGray2
     }
     
@@ -70,7 +70,7 @@ class GestureView: UIViewController {
         guard self.tapGestureRecognizer === gestureRecognizer else { return }
         
         self.isExpanded.toggle()
-
+        
         self.imageTopConstraint?.constant = self.isExpanded ? view.center.x : 50
         self.imageWidthConstraint?.constant = self.isExpanded ? view.frame.width : 140
         self.imageHeightConstraint?.constant = self.isExpanded ? view.frame.width : 140
@@ -79,7 +79,6 @@ class GestureView: UIViewController {
         UIView.animate(withDuration: 0.5) {
             self.view.layoutIfNeeded() }
     completion: { _ in
-
     }
         UIView.animate(withDuration: 0.3, delay: 0.5) {
             self.cancelButton.alpha = self.isExpanded ? 1 : 0
@@ -87,6 +86,5 @@ class GestureView: UIViewController {
     }
     @objc private func cancel(_ sender: Any) {
         tapGesture(tapGestureRecognizer)
-        
     }
 }

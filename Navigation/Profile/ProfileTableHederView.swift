@@ -22,12 +22,12 @@ class ProfileTableHeaderView: UIView {
     }
     
     func setupConstraint() {
-
+        
         let topConstraint = self.topAnchor.constraint(equalTo: self.topAnchor)
         let leadingConstraint = self.leadingAnchor.constraint(equalTo: self.leadingAnchor)
         let trailingConstraint = self.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         let heightConstraint = self.heightAnchor.constraint(equalToConstant: 265)
-
+        
         NSLayoutConstraint.activate([
             topConstraint, leadingConstraint, trailingConstraint, heightConstraint
         ])

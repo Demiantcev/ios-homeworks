@@ -27,10 +27,10 @@ class PostTableViewCell: UITableViewCell {
         let author: String
         let image: String
         let text: String
-        var likes: Int
+        let likes: Int
         let views: Int
     }
-
+    
     private let tapLike = UITapGestureRecognizer()
     private let tapViews = UITapGestureRecognizer()
     private var isExpanded = false
@@ -91,14 +91,6 @@ class PostTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    var likeImage: UIImageView = {
-       var like = UIImageView()
-        like.translatesAutoresizingMaskIntoConstraints = false
-        like.image = UIImage(systemName: "suit.heart.fill")
-        like.tintColor = .red
-        like.alpha = 0
-        return like
-    }()
     
     func setup() {
         self.contentView.backgroundColor = .white
@@ -109,7 +101,6 @@ class PostTableViewCell: UITableViewCell {
         self.backView.addSubview(textPost)
         self.backView.addSubview(likeLabel)
         self.backView.addSubview(viewsLabel)
-        self.backView.addSubview(likeImage)
         
         let backViewConstraint = self.viewConstraint()
         NSLayoutConstraint.activate(backViewConstraint)
@@ -135,12 +126,7 @@ class PostTableViewCell: UITableViewCell {
         let viewsTrailingConstraint = self.viewsLabel.trailingAnchor.constraint(equalTo: self.backView.trailingAnchor,constant: -16)
         let viewsBottomConstraint = self.viewsLabel.bottomAnchor.constraint(equalTo: self.backView.bottomAnchor)
         
-        let likeLabelXConstraint = self.likeImage.centerXAnchor.constraint(equalTo: self.imagePost.centerXAnchor)
-        let likeLabelYConstraint = self.likeImage.centerYAnchor.constraint(equalTo: self.imagePost.centerYAnchor)
-        let likeHeightConstraint = self.likeImage.heightAnchor.constraint(equalToConstant: 50)
-        let likeWidthConstraint = self.likeImage.widthAnchor.constraint(equalToConstant: 50)
-
-        NSLayoutConstraint.activate([imageLeadingConstraint, imageTrailingConstraint, imageHeightConstraint, authorTopConstraint, authorBottomConstraint, authorLeadingConstraint, authorTrailingConstraint, textLeadingConstraint, textTrailingConstraint, textBottomConstraint, viewsTopConstraint, likeLeadingConstraint, imageBottomConstraint, viewsTrailingConstraint, viewsBottomConstraint, likeBottonConstraint, likeLabelXConstraint, likeLabelYConstraint, likeWidthConstraint, likeHeightConstraint
+        NSLayoutConstraint.activate([imageLeadingConstraint, imageTrailingConstraint, imageHeightConstraint, authorTopConstraint, authorBottomConstraint, authorLeadingConstraint, authorTrailingConstraint, textLeadingConstraint, textTrailingConstraint, textBottomConstraint, viewsTopConstraint, likeLeadingConstraint, imageBottomConstraint, viewsTrailingConstraint, viewsBottomConstraint, likeBottonConstraint, likeLeadingConstraint
                                     ])
     }
     
@@ -149,11 +135,11 @@ class PostTableViewCell: UITableViewCell {
         let leadingConstraint = self.backView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor)
         let trailingConstraint = self.backView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
         let bottomConstraint = self.backView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
-
+        
         return [topConstraint, leadingConstraint, trailingConstraint, bottomConstraint]
     }
     private func setupGestureLikeLabel() {
-
+        
         self.likeLabel.addGestureRecognizer(tapLike)
         self.tapLike.addTarget(self, action: #selector(self.tapLikeLabel))
         self.tapLike.view?.isUserInteractionEnabled = true
@@ -176,7 +162,7 @@ class PostTableViewCell: UITableViewCell {
 extension PostTableViewCell: Setupable {
     func setup(with viewModel: ViewModelProtocol) {
         guard let viewModel = viewModel as? ModelPost else { return }
-
+        
         self.authorPost.text = viewModel.author
         self.imagePost.image = UIImage(named: viewModel.image)
         self.textPost.text = viewModel.text
@@ -184,5 +170,6 @@ extension PostTableViewCell: Setupable {
         self.viewsLabel.text = "Views: \(viewModel.views)"
     }
 }
+
 
 

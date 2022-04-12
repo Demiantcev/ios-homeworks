@@ -31,7 +31,7 @@ class PhotosTableViewCell: UITableViewCell {
         foto.clipsToBounds = true
         foto.contentMode = .scaleAspectFit
         foto.tag = 1
-       return foto
+        return foto
     }()
     var fotoImage2: UIImageView = {
         var foto = UIImageView()
@@ -40,7 +40,7 @@ class PhotosTableViewCell: UITableViewCell {
         foto.clipsToBounds = true
         foto.contentMode = .scaleAspectFit
         foto.tag = 2
-       return foto
+        return foto
     }()
     var fotoImage3: UIImageView = {
         var foto = UIImageView()
@@ -49,7 +49,7 @@ class PhotosTableViewCell: UITableViewCell {
         foto.clipsToBounds = true
         foto.contentMode = .scaleAspectFit
         foto.tag = 3
-       return foto
+        return foto
     }()
     var fotoImage4: UIImageView = {
         var foto = UIImageView()
@@ -58,9 +58,9 @@ class PhotosTableViewCell: UITableViewCell {
         foto.clipsToBounds = true
         foto.contentMode = .scaleAspectFit
         foto.tag = 4
-       return foto
+        return foto
     }()
-
+    
     var fotoLabel: UILabel = {
         var label = UILabel()
         label.text = "Photos"
@@ -78,14 +78,14 @@ class PhotosTableViewCell: UITableViewCell {
     }()
     
     var horizontalStack: UIStackView = {
-       var stack = UIStackView()
+        var stack = UIStackView()
         stack.axis = .horizontal
         stack.distribution = .fillEqually
         stack.spacing = 8
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
-
+    
     func setupImageCell() {
         self.contentView.addSubview(backView)
         self.backView.addSubview(horizontalStack)
@@ -117,16 +117,16 @@ class PhotosTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([topConstraint, leadingConstraint, trailingConstraint, bottomConstraint, fotoLabelTopConstraint, fotoLabelLeadingConstraint, fotoLabelTrailingConstraint,fotoLabelBottomConstraint, stackBottomConstraint, stackLeadingConstraint, stackTrailingConstraint, stackHeightConstraint, buttonCenterXConstraint, buttonTrailingConstraint])
     }
     func cellConfigure(with texts: [String]) {
-            for text in texts {
-                if self.fotoImage1.tag == Int(text) {
-                    self.fotoImage1.image = UIImage(named: text)
-                } else if self.fotoImage2.tag == Int(text) {
-                    self.fotoImage2.image = UIImage(named: text)
-                } else if self.fotoImage3.tag == Int(text) {
-                    self.fotoImage3.image = UIImage(named: text)
-                } else if self.fotoImage4.tag == Int(text) {
-                    self.fotoImage4.image = UIImage(named: text)
-                }
+        for text in texts {
+            if self.fotoImage1.tag == Int(text) {
+                self.fotoImage1.image = UIImage(named: text)
+            } else if self.fotoImage2.tag == Int(text) {
+                self.fotoImage2.image = UIImage(named: text)
+            } else if self.fotoImage3.tag == Int(text) {
+                self.fotoImage3.image = UIImage(named: text)
+            } else if self.fotoImage4.tag == Int(text) {
+                self.fotoImage4.image = UIImage(named: text)
             }
         }
+    }
 }

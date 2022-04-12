@@ -86,13 +86,10 @@ class PhotosViewController: UIViewController, UICollectionViewDelegateFlowLayout
             blackBackgroundView?.alpha = 0
             
             keyWindow.addSubview(blackBackgroundView!)
-            
             keyWindow.addSubview(zoomingImageView)
             
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.blackBackgroundView?.alpha = 1
-                
-                //let height = self.startingFrame!.height / self.startingFrame!.width * keyWindow.frame.width
                 
                 zoomingImageView.frame = CGRect(x: 0, y: 0, width: keyWindow.frame.width, height: keyWindow.frame.width / 1.5)
                 zoomingImageView.center = keyWindow.center

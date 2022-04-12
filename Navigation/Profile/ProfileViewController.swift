@@ -22,8 +22,6 @@ class ProfileViewController: UIViewController {
     }()
     private let photoProfile = ["1", "2", "3", "4"]
     
-    var postNews = postProfile
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
@@ -56,7 +54,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource, Pos
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if section == 0 {return 1}
+        if section == 0 { return 1 }
         else {return postProfile.count}
     }
     
@@ -83,34 +81,39 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource, Pos
         }
     }
     
-    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return ProfileTableHeaderView()
     }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {return 265}
         return 0
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             let gallery = PhotosViewController()
             navigationController?.pushViewController(gallery, animated: true)
         }
     }
+    
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .delete
     }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            postNews.remove(at: indexPath.row)
+            postProfile.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .right)
         }
     }
+    
     func tapLike(cell: PostTableViewCell) {
         guard let index = tableView.indexPath(for: cell)?.row else { return }
         postProfile[index].likes += 1
         let reloadRow = IndexPath(row: index, section: 1)
         tableView.reloadRows(at: [reloadRow], with: .none)
+        
     }
     func newViews(cell: PostTableViewCell) {
         
@@ -122,19 +125,17 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource, Pos
         tableView.reloadRows(at: [reloadRow], with: .none)
         
         let post = postProfile[index]
-        let newsModel = DetailView.ModelPostNews(author: post.author, image: post.image, text: post.description)
+        let newsModel = DetailView.ModelPostNews(author: post.author, image: post.image, text: post.description, like: post.likes, views: post.views)
         detailView.setup(newsModel)
         
         view.addSubview(detailView)
-
+        
         let topConstraint = detailView.topAnchor.constraint(equalTo: view.topAnchor)
         let leadingConstraint = detailView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         let trailingConstraint = detailView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         let bottomConstraint = detailView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-
+        
         NSLayoutConstraint.activate([topConstraint, leadingConstraint, trailingConstraint, bottomConstraint])
-
-
     }
 }
 
