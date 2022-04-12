@@ -64,7 +64,6 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         guard self.tapGestureRecognizer === gestureRecognizer else { return }
         if let imageView = gestureRecognizer.view as? UIImageView {
             delegate?.performZoomInForImageView(imageView)
-            
         }
     }
 }

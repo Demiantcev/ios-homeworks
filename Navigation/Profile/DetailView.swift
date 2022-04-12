@@ -6,14 +6,17 @@
 //
 import UIKit
 
-class DetailViewController: UIViewController {
+class DetailView: UIView {
     
     struct ModelPostNews: ViewModelProtocol {
         let author: String
         let image: String
         let text: String
+//        let like: Int
+//        let views: Int
     }
     var postDetail = postProfile
+    var tapImage = UITapGestureRecognizer()
     
     var imagePost: UIImageView = {
         var image = UIImageView()
@@ -39,37 +42,80 @@ class DetailViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+//    var likeLabel: UILabel = {
+//        var label = UILabel()
+//        label.font = .systemFont(ofSize: 16, weight: .regular)
+//        label.textColor = .black
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        return label
+//    }()
+//    var viewsLabel: UILabel = {
+//        var label = UILabel()
+//        label.font = .systemFont(ofSize: 16, weight: .regular)
+//        label.textColor = .black
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        return label
+//    }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.backgroundColor = .white
+        self.translatesAutoresizingMaskIntoConstraints = false
+        setupPost()
+        tapImageGesture()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
         
-        view.backgroundColor = .white
+    func setupPost() {
         
-        self.view.addSubview(authorPost)
-        self.view.addSubview(imagePost)
-        self.view.addSubview(textPost)
-
-        let nameLabelTopConstraint = self.authorPost.topAnchor.constraint(equalTo: view.topAnchor, constant: 10)
-        let nameLabelLeadingConstraint = self.authorPost.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16)
-        let nameLabelTrailingConstraint = self.authorPost.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        self.addSubview(authorPost)
+        self.addSubview(imagePost)
+        self.addSubview(textPost)
+        
+        let nameLabelTopConstraint = self.authorPost.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10)
+        let nameLabelLeadingConstraint = self.authorPost.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16)
+        let nameLabelTrailingConstraint = self.authorPost.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         let nameLabelBottomConstraint = self.authorPost.bottomAnchor.constraint(equalTo: self.imagePost.topAnchor, constant: -10)
         
-        let imageLeadingConstraint = self.imagePost.leadingAnchor.constraint(equalTo: view.leadingAnchor)
-        let imageTrailingConstraint = self.imagePost.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        let imageHeightConstraint = self.imagePost.heightAnchor.constraint(equalTo: self.view.widthAnchor)
-        let imageBottomConstraint = self.imagePost.bottomAnchor.constraint(equalTo: self.textPost.topAnchor, constant: 150)
+        let imageLeadingConstraint = self.imagePost.leadingAnchor.constraint(equalTo: self.leadingAnchor)
+        let imageTrailingConstraint = self.imagePost.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+        let imageHeightConstraint = self.imagePost.heightAnchor.constraint(equalTo: self.widthAnchor)
+        let imageBottomConstraint = self.imagePost.bottomAnchor.constraint(equalTo: self.textPost.topAnchor, constant: 100)
         
-        let textLeadingConstraint = self.textPost.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16)
-        let textTrailingConstraint = self.textPost.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
-        let textBottomConstraint = self.textPost.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        let textLeadingConstraint = self.textPost.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16)
+        let textTrailingConstraint = self.textPost.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16)
+        let textBottomConstraint = self.textPost.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         
-        NSLayoutConstraint.activate([nameLabelTopConstraint, nameLabelLeadingConstraint, nameLabelTrailingConstraint, imageLeadingConstraint, imageTrailingConstraint, imageHeightConstraint, textBottomConstraint, textLeadingConstraint, textTrailingConstraint, imageHeightConstraint,nameLabelBottomConstraint, imageBottomConstraint
+//        let likeLeadingConstraint = self.likeLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16)
+//        let likeBottonConstraint = self.likeLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50)
+//
+//        let viewsTopConstraint = self.viewsLabel.topAnchor.constraint(equalTo: self.likeLabel.topAnchor)
+//        let viewsTrailingConstraint = self.viewsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -16)
+//        let viewsBottomConstraint = self.viewsLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50)
+        
+        NSLayoutConstraint.activate([nameLabelTopConstraint, nameLabelLeadingConstraint, nameLabelTrailingConstraint, imageLeadingConstraint, imageTrailingConstraint, textBottomConstraint, textLeadingConstraint, textTrailingConstraint,nameLabelBottomConstraint, imageBottomConstraint, imageHeightConstraint
+//                                     likeBottonConstraint, likeLeadingConstraint, viewsTopConstraint, viewsBottomConstraint, viewsTrailingConstraint
                                     ])
+    }
+    private func tapImageGesture() {
+        self.imagePost.addGestureRecognizer(tapImage)
+        self.tapImage.view?.isUserInteractionEnabled = true
+        self.tapImage.addTarget(self, action: #selector(backPostNews))
+    }
+    @objc func backPostNews(_ gestureRecognizer: UITapGestureRecognizer) {
+        guard self.tapImage === gestureRecognizer else { return }
+        self.removeFromSuperview()
     }
     
     func setup(_ model: ModelPostNews) {
         self.authorPost.text = model.author
         self.imagePost.image = UIImage(named: model.image)
         self.textPost.text = model.text
+//        self.likeLabel.text = "Likes: \(model.like)"
+//        self.viewsLabel.text = "Views: \(model.views)"
     }
 }
+

@@ -21,7 +21,6 @@ class ProfileTableHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     func setupConstraint() {
 
         let topConstraint = self.topAnchor.constraint(equalTo: self.topAnchor)

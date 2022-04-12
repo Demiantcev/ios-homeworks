@@ -6,12 +6,18 @@
 //
 import UIKit
 
+protocol PostDelegate: AnyObject {
+    func tapLike(cell: PostTableViewCell)
+    func newViews(cell: PostTableViewCell)
+}
+
 class PostTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.setup()
         self.setupGestureLikeLabel()
+        self.setupGestureTapImage()
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -21,12 +27,14 @@ class PostTableViewCell: UITableViewCell {
         let author: String
         let image: String
         let text: String
-        let likes: Int
+        var likes: Int
         let views: Int
     }
-    private let tapGestureRecognizer = UITapGestureRecognizer()
+
+    private let tapLike = UITapGestureRecognizer()
+    private let tapViews = UITapGestureRecognizer()
     private var isExpanded = false
-    var ss = PostProfile()
+    var delegate: PostDelegate?
     
     var backView: UIView = {
         var view = UIView()
@@ -67,9 +75,7 @@ class PostTableViewCell: UITableViewCell {
     
     var likeLabel: UILabel = {
         var label = UILabel()
-        label.tag = 1
         label.setContentCompressionResistancePriority(UILayoutPriority(250), for: .horizontal)
-        label.text = "Likes: "
         label.font = .systemFont(ofSize: 16, weight: .regular)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -85,6 +91,14 @@ class PostTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    var likeImage: UIImageView = {
+       var like = UIImageView()
+        like.translatesAutoresizingMaskIntoConstraints = false
+        like.image = UIImage(systemName: "suit.heart.fill")
+        like.tintColor = .red
+        like.alpha = 0
+        return like
+    }()
     
     func setup() {
         self.contentView.backgroundColor = .white
@@ -95,6 +109,7 @@ class PostTableViewCell: UITableViewCell {
         self.backView.addSubview(textPost)
         self.backView.addSubview(likeLabel)
         self.backView.addSubview(viewsLabel)
+        self.backView.addSubview(likeImage)
         
         let backViewConstraint = self.viewConstraint()
         NSLayoutConstraint.activate(backViewConstraint)
@@ -119,8 +134,13 @@ class PostTableViewCell: UITableViewCell {
         let viewsTopConstraint = self.viewsLabel.topAnchor.constraint(equalTo: self.likeLabel.topAnchor)
         let viewsTrailingConstraint = self.viewsLabel.trailingAnchor.constraint(equalTo: self.backView.trailingAnchor,constant: -16)
         let viewsBottomConstraint = self.viewsLabel.bottomAnchor.constraint(equalTo: self.backView.bottomAnchor)
+        
+        let likeLabelXConstraint = self.likeImage.centerXAnchor.constraint(equalTo: self.imagePost.centerXAnchor)
+        let likeLabelYConstraint = self.likeImage.centerYAnchor.constraint(equalTo: self.imagePost.centerYAnchor)
+        let likeHeightConstraint = self.likeImage.heightAnchor.constraint(equalToConstant: 50)
+        let likeWidthConstraint = self.likeImage.widthAnchor.constraint(equalToConstant: 50)
 
-        NSLayoutConstraint.activate([imageLeadingConstraint, imageTrailingConstraint, imageHeightConstraint, authorTopConstraint, authorBottomConstraint, authorLeadingConstraint, authorTrailingConstraint, textLeadingConstraint, textTrailingConstraint, textBottomConstraint, viewsTopConstraint, likeLeadingConstraint, imageBottomConstraint, viewsTrailingConstraint, viewsBottomConstraint, likeBottonConstraint
+        NSLayoutConstraint.activate([imageLeadingConstraint, imageTrailingConstraint, imageHeightConstraint, authorTopConstraint, authorBottomConstraint, authorLeadingConstraint, authorTrailingConstraint, textLeadingConstraint, textTrailingConstraint, textBottomConstraint, viewsTopConstraint, likeLeadingConstraint, imageBottomConstraint, viewsTrailingConstraint, viewsBottomConstraint, likeBottonConstraint, likeLabelXConstraint, likeLabelYConstraint, likeWidthConstraint, likeHeightConstraint
                                     ])
     }
     
@@ -133,21 +153,29 @@ class PostTableViewCell: UITableViewCell {
         return [topConstraint, leadingConstraint, trailingConstraint, bottomConstraint]
     }
     private func setupGestureLikeLabel() {
-        
-        self.likeLabel.addGestureRecognizer(tapGestureRecognizer)
-        self.tapGestureRecognizer.addTarget(self, action: #selector(self.tapLikeLabel))
-        self.tapGestureRecognizer.view?.isUserInteractionEnabled = true
+
+        self.likeLabel.addGestureRecognizer(tapLike)
+        self.tapLike.addTarget(self, action: #selector(self.tapLikeLabel))
+        self.tapLike.view?.isUserInteractionEnabled = true
     }
     @objc func tapLikeLabel(_ gestureRecognizer: UITapGestureRecognizer) {
-        guard self.tapGestureRecognizer === gestureRecognizer else { return }
-        
-        self.isExpanded.toggle()
-
+        guard self.tapLike === gestureRecognizer else { return }
+        delegate?.tapLike(cell: self)
+    }
+    
+    private func setupGestureTapImage() {
+        self.imagePost.addGestureRecognizer(tapViews)
+        self.tapViews.addTarget(self, action: #selector(self.tapViewsLabel))
+        self.tapViews.view?.isUserInteractionEnabled = true
+    }
+    @objc func tapViewsLabel(_ gestureRecognizer: UITapGestureRecognizer) {
+        guard self.tapViews === gestureRecognizer else { return }
+        delegate?.newViews(cell: self)
     }
 }
 extension PostTableViewCell: Setupable {
     func setup(with viewModel: ViewModelProtocol) {
-        guard let viewModel = viewModel as? ModelPost else {return}
+        guard let viewModel = viewModel as? ModelPost else { return }
 
         self.authorPost.text = viewModel.author
         self.imagePost.image = UIImage(named: viewModel.image)
@@ -155,6 +183,6 @@ extension PostTableViewCell: Setupable {
         self.likeLabel.text = "Likes: \(viewModel.likes)"
         self.viewsLabel.text = "Views: \(viewModel.views)"
     }
-    
 }
+
 

@@ -71,7 +71,6 @@ class GestureView: UIViewController {
         
         self.isExpanded.toggle()
 
-        
         self.imageTopConstraint?.constant = self.isExpanded ? view.center.x : 50
         self.imageWidthConstraint?.constant = self.isExpanded ? view.frame.width : 140
         self.imageHeightConstraint?.constant = self.isExpanded ? view.frame.width : 140
