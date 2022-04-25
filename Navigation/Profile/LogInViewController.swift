@@ -11,9 +11,10 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     
     var buttonLogIn: UIButton = {
         var button = UIButton(type: .roundedRect)
-        var color = UIImage(named: "blue_pixel") as UIImage?
+        if let image = UIImage(named: "blue_pixel") {
+            button.backgroundColor = .init(patternImage: image)
+        }
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .init(patternImage: color!)
         button.setTitle("Log in", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 10
