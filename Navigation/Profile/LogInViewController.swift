@@ -11,9 +11,9 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     
     var buttonLogIn: UIButton = {
         var button = UIButton(type: .roundedRect)
-        var color: UIImage = UIImage(named: "blue_pixel")!
+        var color = UIImage(named: "blue_pixel") as UIImage?
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .init(patternImage: color)
+        button.backgroundColor = .init(patternImage: color!)
         button.setTitle("Log in", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 10
