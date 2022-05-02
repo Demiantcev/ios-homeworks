@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EB03725F27EF3406008200F3 /* GestureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB03725E27EF3406008200F3 /* GestureView.swift */; };
 		EB23057627BE2FE30050CAA9 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB23057527BE2FE30050CAA9 /* FeedViewController.swift */; };
 		EB23057827BE2FFA0050CAA9 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB23057727BE2FFA0050CAA9 /* ProfileViewController.swift */; };
 		EB23057C27BE7ACB0050CAA9 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB23057B27BE7ACB0050CAA9 /* PostViewController.swift */; };
@@ -19,6 +18,7 @@
 		EB5040A827B95DF100600DC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB5040A727B95DF100600DC1 /* Assets.xcassets */; };
 		EB5040AB27B95DF100600DC1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB5040A927B95DF100600DC1 /* LaunchScreen.storyboard */; };
 		EB67592C27E8BEED001A1FAC /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB67592B27E8BEED001A1FAC /* PhotosTableViewCell.swift */; };
+		EB7E3220281FD1F90088B2E9 /* GestureRecognizerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7E321F281FD1F90088B2E9 /* GestureRecognizerView.swift */; };
 		EB824B1E27EC92E8007B9F36 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB824B1D27EC92E8007B9F36 /* PhotosViewController.swift */; };
 		EB824B2027ECC0B4007B9F36 /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB824B1F27ECC0B4007B9F36 /* PhotosCollectionViewCell.swift */; };
 		EBACB5CB27FAEA1300EDC098 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBACB5CA27FAEA1300EDC098 /* DetailView.swift */; };
@@ -29,7 +29,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		EB03725E27EF3406008200F3 /* GestureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureView.swift; sourceTree = "<group>"; };
 		EB23057527BE2FE30050CAA9 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		EB23057727BE2FFA0050CAA9 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		EB23057B27BE7ACB0050CAA9 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
@@ -43,6 +42,7 @@
 		EB5040AA27B95DF100600DC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EB5040AC27B95DF100600DC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB67592B27E8BEED001A1FAC /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
+		EB7E321F281FD1F90088B2E9 /* GestureRecognizerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureRecognizerView.swift; sourceTree = "<group>"; };
 		EB824B1D27EC92E8007B9F36 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		EB824B1F27ECC0B4007B9F36 /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		EBACB5CA27FAEA1300EDC098 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
@@ -72,7 +72,7 @@
 				EB824B1D27EC92E8007B9F36 /* PhotosViewController.swift */,
 				EB824B1F27ECC0B4007B9F36 /* PhotosCollectionViewCell.swift */,
 				EBFEE05727DFD71F003D2687 /* ProfileTableHederView.swift */,
-				EB03725E27EF3406008200F3 /* GestureView.swift */,
+				EB7E321F281FD1F90088B2E9 /* GestureRecognizerView.swift */,
 				EBE7E84427DA1E4F00833DD4 /* LogInViewController.swift */,
 				EBACB5CA27FAEA1300EDC098 /* DetailView.swift */,
 			);
@@ -192,6 +192,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB7E3220281FD1F90088B2E9 /* GestureRecognizerView.swift in Sources */,
 				EB23057C27BE7ACB0050CAA9 /* PostViewController.swift in Sources */,
 				EBFEE05827DFD71F003D2687 /* ProfileTableHederView.swift in Sources */,
 				EBACB5CB27FAEA1300EDC098 /* DetailView.swift in Sources */,
@@ -199,7 +200,6 @@
 				EB50409F27B95DF100600DC1 /* AppDelegate.swift in Sources */,
 				EB23057827BE2FFA0050CAA9 /* ProfileViewController.swift in Sources */,
 				EB23057627BE2FE30050CAA9 /* FeedViewController.swift in Sources */,
-				EB03725F27EF3406008200F3 /* GestureView.swift in Sources */,
 				EB23057E27BEB35C0050CAA9 /* Post.swift in Sources */,
 				EB23058027C11A510050CAA9 /* InfoViewController.swift in Sources */,
 				EBE7E84527DA1E4F00833DD4 /* LogInViewController.swift in Sources */,

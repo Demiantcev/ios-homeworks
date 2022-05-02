@@ -8,13 +8,18 @@
 
 import UIKit
 
-class ProfileTableHeaderView: UIView {
+protocol GestureDelegate: AnyObject {
+    func cancelButton()
+    func gestureDelegateFoto(cell: ProfileTableHeaderView)
+}
+
+class ProfileTableHeaderView: UITableViewHeaderFooterView {
     
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
         self.setup()
         self.setupConstraint()
+        self.setupGesture()
     }
     
     required init?(coder: NSCoder) {
@@ -43,7 +48,7 @@ class ProfileTableHeaderView: UIView {
         self.addSubview(statusTextField)
         
         let nameLabelTopConstraint = self.nameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 27)
-        let nameLabelLeadingConstraint = self.nameLabel.leadingAnchor.constraint(equalTo: self.fotoImage.trailingAnchor, constant: 25)
+        let nameLabelLeadingConstraint = self.nameLabel.leadingAnchor.constraint(equalTo: self.statusTextField.leadingAnchor)
         let nameLabelTrailingConstraint = self.nameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         
         let buttonLeadingConstraint = self.showButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16)
@@ -54,7 +59,7 @@ class ProfileTableHeaderView: UIView {
         let imageTopConstraint = self.fotoImage.topAnchor.constraint(equalTo: self.topAnchor, constant: 16)
         let imageLeadingConstraint = self.fotoImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16)
         let imageHeightConstraint = self.fotoImage.heightAnchor.constraint(equalToConstant: 140)
-        let imageWeightConstraint = self.fotoImage.widthAnchor.constraint(equalToConstant: 140)
+        let imageWidthConstraint = self.fotoImage.widthAnchor.constraint(equalToConstant: 140)
         
         let showLabelLeadingConstraint = self.showLabel.leadingAnchor.constraint(equalTo: self.fotoImage.trailingAnchor, constant: 25)
         let showLabelBottomAnchor = self.showLabel.bottomAnchor.constraint(equalTo: self.statusTextField.bottomAnchor, constant: 50)
@@ -65,11 +70,13 @@ class ProfileTableHeaderView: UIView {
         let textBottomConstraint = self.statusTextField.bottomAnchor.constraint(equalTo: self.showButton.topAnchor, constant: -15)
         let textHeightConstraint = self.statusTextField.heightAnchor.constraint(equalToConstant: 40)
         
-        
         NSLayoutConstraint.activate([
-            nameLabelTopConstraint, nameLabelTrailingConstraint, buttonLeadingConstraint, buttonTrailingConstraint, imageTopConstraint, imageLeadingConstraint, showLabelBottomAnchor, showLabelLeadingConstraint,  buttonHeightConstraint, showLabelTopConstraint, nameLabelLeadingConstraint, imageHeightConstraint, imageWeightConstraint, buttonTopConstraint, textBottomConstraint, textLeadingConstraint, textTrailingConstraint, textHeightConstraint
-        ])
+            nameLabelTopConstraint, nameLabelTrailingConstraint, buttonLeadingConstraint, buttonTrailingConstraint, imageTopConstraint, imageLeadingConstraint, showLabelBottomAnchor, showLabelLeadingConstraint,  buttonHeightConstraint, showLabelTopConstraint, imageHeightConstraint, imageWidthConstraint, textBottomConstraint, textLeadingConstraint, textTrailingConstraint, textHeightConstraint, nameLabelLeadingConstraint, buttonTopConstraint
+        ].compactMap({$0}))
     }
+    
+    private let tapGestureRecognizer = UITapGestureRecognizer()
+    var delegate: GestureDelegate?
     
     var showButton: UIButton = {
         var button = UIButton(type: .roundedRect)
@@ -157,4 +164,17 @@ extension ProfileTableHeaderView: UITextFieldDelegate {
         return true
     }
 }
+extension ProfileTableHeaderView: UIGestureRecognizerDelegate {
+    
+    func setupGesture() {
+        self.fotoImage.addGestureRecognizer(self.tapGestureRecognizer)
+        self.tapGestureRecognizer.addTarget(self, action: #selector(self.tapGesture))
+        self.tapGestureRecognizer.view?.isUserInteractionEnabled = true
+    }
+    @objc func tapGesture(_ gestureRecognizer: UITapGestureRecognizer) {
+        guard self.tapGestureRecognizer === gestureRecognizer else { return }
+        delegate?.gestureDelegateFoto(cell: self)
+    }
+}
+
 

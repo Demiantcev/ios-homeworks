@@ -18,6 +18,7 @@ class ProfileViewController: UIViewController {
         table.register(UITableViewCell.self, forCellReuseIdentifier: "DefaultCell")
         table.register(PostTableViewCell.self, forCellReuseIdentifier: "PostProfile")
         table.register(PhotosTableViewCell.self, forCellReuseIdentifier: "Photos")
+        table.register(ProfileTableHeaderView.self, forHeaderFooterViewReuseIdentifier: "Header")
         return table
     }()
     private let photoProfile = ["1", "2", "3", "4"]
@@ -82,7 +83,9 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource, Pos
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return ProfileTableHeaderView()
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "Header") as! ProfileTableHeaderView
+        header.delegate = self
+        return header
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -138,4 +141,28 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource, Pos
         NSLayoutConstraint.activate([topConstraint, leadingConstraint, trailingConstraint, bottomConstraint])
     }
 }
+extension ProfileViewController: GestureDelegate {
 
+    func cancelButton() {
+        self.tableView.beginUpdates()
+        self.tableView.endUpdates()
+    }
+    
+    func gestureDelegateFoto(cell: ProfileTableHeaderView) {
+        let animate = GestureView()
+        self.view.addSubview(animate.view)
+        self.addChild(animate)
+        animate.view.translatesAutoresizingMaskIntoConstraints = false
+
+        
+        NSLayoutConstraint.activate([
+            animate.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            animate.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            animate.view.topAnchor.constraint(equalTo: view.topAnchor),
+            animate.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+        animate.didMove(toParent: self)
+    }
+    
+    
+}
